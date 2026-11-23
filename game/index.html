@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember Court — a duel of cards</title>
+<link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <h1>EMBER COURT</h1>
+    <span class="subtitle">a duel of four elements</span>
+    <div id="court-banner" title="Cards of this element gain +2 power this round"></div>
+    <span id="round-label"></span>
+    <button id="mute-btn" type="button" title="Mute (M)">Sound: on</button>
+    <button id="restart-btn" type="button" title="Restart (R)">Restart</button>
+  </header>
+
+  <main id="table">
+    <section class="side-row" id="opponent-row">
+      <div class="fighter" id="opponent-fighter">
+        <div class="avatar"><svg viewBox="0 0 64 64" fill="#f2c94c"><path d="M10 48 L14 20 L24 32 L32 14 L40 32 L50 20 L54 48 Z M14 52 L50 52 L50 56 L14 56 Z"/></svg></div>
+        <div class="name">The Ashen Queen</div>
+        <div class="life-line"><span class="life-num" id="opp-life">24 ❤</span><div class="life-bar"><div class="life-fill" id="opp-life-fill"></div></div><span class="block-badge" id="opp-block" hidden>0</span></div>
+        <div class="energy-row" id="opp-energy"></div>
+        <div class="deck-count" id="opp-deck"></div>
+      </div>
+      <div class="hand" id="opponent-hand" aria-label="The Queen's hand"></div>
+    </section>
+
+    <section id="middle">
+      <div id="played-zone"></div>
+      <div id="log-panel"><div class="log-title">COURT CHRONICLE</div><div id="log-lines"></div></div>
+    </section>
+
+    <section class="side-row" id="player-row">
+      <div class="fighter" id="player-fighter">
+        <div class="avatar"><svg viewBox="0 0 64 64" fill="#9fd8ff"><path d="M32 6 C38 18 50 24 50 40 A18 18 0 1 1 14 40 C14 30 22 26 26 18 C28 24 30 26 32 26 C30 18 30 12 32 6 Z"/></svg></div>
+        <div class="name">You</div>
+        <div class="life-line"><span class="life-num" id="player-life">24 ❤</span><div class="life-bar"><div class="life-fill" id="player-life-fill"></div></div><span class="block-badge" id="player-block" hidden>0</span></div>
+        <div class="energy-row" id="player-energy"></div>
+        <div class="deck-count" id="player-deck"></div>
+      </div>
+      <div class="hand" id="player-hand" aria-label="Your hand"></div>
+      <div id="player-controls">
+        <button id="end-turn" type="button">End Turn</button>
+        <div id="hint-line">Click a card to play it.<br>Matching the court element: +2.<br>Same element twice: +1 more.</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="overlay" id="title-overlay">
+  <div class="panel">
+    <h2>EMBER COURT</h2>
+    <p><i>A duel of cards in a court of four elements. The Ashen Queen holds the throne — take it from her, one card at a time.</i></p>
+    <div class="rules">
+      <b>Goal:</b> reduce the Queen to 0 life before she does the same to you.<br>
+      <b>Each round</b> you gain energy (up to 6) and draw a card. Click a card to play it.<br>
+      <b>The court</b> turns through Ember, Tide, Gale and Stone — cards of the court's element gain <b>+2 power</b>.<br>
+      <b>Resonance:</b> play two cards of the same element in one turn and the second gains <b>+1</b>.<br>
+      <b>Block</b> absorbs damage but fades at the end of your turn. <b>Quake</b> strikes through block.<br>
+      <b>Keys:</b> Enter starts · Space ends your turn · M mutes · R restarts.
+    </div>
+    <button class="big-button" id="start-btn" type="button">Take Your Seat</button>
+    <p class="tiny">Original game · plays offline · no account needed</p>
+  </div>
+</div>
+
+<div class="overlay hidden" id="end-overlay">
+  <div class="panel">
+    <h3 id="end-title">Victory</h3>
+    <p id="end-text"></p>
+    <div id="end-stats"></div>
+    <button class="big-button" id="again-btn" type="button">Duel Again</button>
+    <p class="tiny">Press R or Enter to play again</p>
+  </div>
+</div>
+
+<div id="toast"></div>
+<p id="status" role="status" aria-live="polite"></p>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
